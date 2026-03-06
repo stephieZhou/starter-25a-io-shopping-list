@@ -15,21 +15,21 @@ std::vector<Item> LoadShoppingItemsFromFile(const std::string& filename) {
     throw std::invalid_argument("can't open!!!");
   }
 
-  if (ifs.tellg() > 1) {
-    throw std::invalid_argument("empty!");
-  }
-
   while (ifs.good()) {
     std::string name;
     int quant = 0;
     double pri = 0.0;
-    try {
-      ifs >> name >> quant >> pri;
-    } catch (...) {
-      throw std::invalid_argument("can't parse!");
-    }
+    ifs >> name;
     if (ifs.fail()) {
-      break;
+      throw std::invalid_argument("can't parse name");
+    }
+    ifs >> quant;
+    if (ifs.fail()) {
+      throw std::invalid_argument("can't parse quantity");
+    }
+    ifs >> pri;
+    if (ifs.fail()) {
+      throw std::invalid_argument("can't parse price");
     }
     Item it = {name, quant, pri};
     shopping_items.push_back(it);
