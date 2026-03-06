@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <limits>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -21,15 +22,18 @@ std::vector<Item> LoadShoppingItemsFromFile(const std::string& filename) {
     double pri = 0.0;
     ifs >> name;
     if (ifs.fail()) {
-      throw std::invalid_argument("can't parse name");
+      ifs.clear();
+      ifs.ignore(1, ' ');
     }
     ifs >> quant;
     if (ifs.fail()) {
-      throw std::invalid_argument("can't parse quantity");
+      ifs.clear();
+      ifs.ignore(2, ' ');
     }
     ifs >> pri;
     if (ifs.fail()) {
-      throw std::invalid_argument("can't parse price");
+      ifs.clear();
+      ifs.ignore(3, ' ');
     }
     Item it = {name, quant, pri};
     shopping_items.push_back(it);
