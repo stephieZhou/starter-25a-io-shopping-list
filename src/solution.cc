@@ -23,17 +23,17 @@ std::vector<Item> LoadShoppingItemsFromFile(const std::string& filename) {
     ifs >> name;
     if (ifs.fail()) {
       ifs.clear();
-      ifs.ignore(1, ' ');
+      ifs.ignore(name.length(), ' ');
     }
     ifs >> quant;
     if (ifs.fail()) {
       ifs.clear();
-      ifs.ignore(1, ' ');
+      ifs.ignore(2, ' ');
     }
     ifs >> pri;
     if (ifs.fail()) {
       ifs.clear();
-      ifs.ignore(1, ' ');
+      ifs.ignore(4, ' ');
     }
     Item it = {name, quant, pri};
     shopping_items.push_back(it);
