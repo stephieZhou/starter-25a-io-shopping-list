@@ -20,14 +20,21 @@ std::vector<Item> LoadShoppingItemsFromFile(const std::string& filename) {
     std::string name;
     int quant = 0;
     double pri = 0.0;
-    ifs >> name >> quant >> pri;
-
+    ifs >> name;
     if (ifs.fail()) {
       ifs.clear();
       ifs.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-      continue;
     }
-
+    ifs >> quant;
+    if (ifs.fail()) {
+      ifs.clear();
+      ifs.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    ifs >> pri;
+    if (ifs.fail()) {
+      ifs.clear();
+      ifs.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
     Item it = {name, quant, pri};
     shopping_items.push_back(it);
   }
